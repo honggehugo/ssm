@@ -1,0 +1,775 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bky.dao.AddMapper" >
+  <resultMap id="BaseResultMap" type="com.bky.model.Add" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="tname" property="tname" jdbcType="VARCHAR" />
+    <result column="tpwd" property="tpwd" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="CompanyResultMap" type="com.bky.model.QyCompany" >
+    <result column="cpyId" property="cpyId" jdbcType="VARCHAR" />
+    <result column="cpyName" property="cpyName" jdbcType="VARCHAR" />
+    <result column="cpyState" property="cpyState" jdbcType="VARCHAR" />
+    <result column="schoolId" property="schoolId" jdbcType="VARCHAR" />
+    <result column="cpyDesc" property="cpyDesc" jdbcType="VARCHAR" />
+    <result column="ceoid" property="ceoid" jdbcType="VARCHAR" />
+    <result column="ceoImg" property="ceoImg" jdbcType="VARCHAR" />
+    <result column="manager1" property="manager1" jdbcType="VARCHAR" />
+    <result column="managerImg1" property="managerImg1" jdbcType="VARCHAR" />
+    <result column="manager2" property="manager2" jdbcType="VARCHAR" />
+    <result column="managerImg2" property="managerImg2" jdbcType="VARCHAR" />
+    <result column="manager3" property="manager3" jdbcType="VARCHAR" />
+    <result column="managerImg3" property="managerImg3" jdbcType="VARCHAR" />
+    <result column="executor1" property="executor1" jdbcType="VARCHAR" />
+    <result column="executor1Img" property="executor1Img" jdbcType="VARCHAR" />    
+    <result column="executor2" property="executor2" jdbcType="VARCHAR" />
+    <result column="executor2Img" property="executor2Img" jdbcType="VARCHAR" />
+    <result column="cpyDecn" property="cpyDecn" jdbcType="VARCHAR" />
+    <result column="createTime" property="createTime" jdbcType="VARCHAR" />
+    <result column="mdfTime" property="mdfTime" jdbcType="VARCHAR" />
+    <result column="other1" property="other1" jdbcType="VARCHAR" />
+    <result column="other2" property="other2" jdbcType="VARCHAR" />
+    <result column="other3" property="other3" jdbcType="VARCHAR" />
+    <result column="empNo" property="empNo" jdbcType="VARCHAR" />
+    <result column="subject" property="subject" jdbcType="VARCHAR" />
+    <result column="industry" property="industry" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="cooContent" property="cooContent" jdbcType="VARCHAR" />
+    <result column="closely" property="closely" jdbcType="VARCHAR" />
+    <result column="cpyNature" property="cpyNature" jdbcType="VARCHAR" />
+    <result column="schContact" property="schContact" jdbcType="VARCHAR" />
+    <result column="schPos" property="schPos" jdbcType="VARCHAR" />
+    <result column="cpyContact" property="cpyContact" jdbcType="VARCHAR" />
+    <result column="inTime" property="inTime" jdbcType="VARCHAR" />
+    <result column="cpyTele" property="cpyTele" jdbcType="VARCHAR" />
+    <result column="cpyImg" property="cpyImg" jdbcType="VARCHAR" />
+    <result column="products" property="products" jdbcType="VARCHAR" />
+    <result column="organStru" property="organStru" jdbcType="VARCHAR" />
+    <result column="personnel" property="personnel" jdbcType="VARCHAR" />
+    <result column="manDepart" property="manDepart" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="EmpResultMap1" type="com.bky.model.UstEmp" >
+    <result column="empId" property="empId" jdbcType="VARCHAR" />
+    <result column="empNo" property="empNo" jdbcType="VARCHAR" />
+    <result column="dptNo" property="dptNo" jdbcType="VARCHAR" />
+    <result column="empPasswd" property="empPasswd" jdbcType="VARCHAR" />
+    <result column="empName" property="empName" jdbcType="VARCHAR" />
+    <result column="empDes" property="empDes" jdbcType="VARCHAR" />
+    <result column="createTime" property="createTime" jdbcType="VARCHAR" />
+    <result column="mdfTime" property="mdfTime" jdbcType="VARCHAR" />
+    <result column="other1" property="other1" jdbcType="VARCHAR" />
+    <result column="other2" property="other2" jdbcType="VARCHAR" />
+    <result column="other3" property="other3" jdbcType="VARCHAR" />
+  </resultMap>
+   <resultMap id="CompanyResultMap1" type="com.bky.model.QyCompany" >
+    <result column="cpyState" property="cpyState" jdbcType="VARCHAR" />
+    <result column="other1" property="other1" jdbcType="VARCHAR" />
+  </resultMap>
+   <resultMap id="ZPResultMap" type="com.bky.model.QyJob" >
+    <result column="jobYear" property="jobYear" jdbcType="VARCHAR" />
+    <result column="jobNum" property="jobNum" jdbcType="VARCHAR" />
+    <result column="gradNum" property="gradNum" jdbcType="VARCHAR" />
+    <result column="employNum" property="employNum" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="EmpResultMap" type="com.bky.model.UstEmp" >
+    <result column="empNo" property="empNo" jdbcType="VARCHAR" />
+    <result column="empPasswd" property="empPasswd" jdbcType="VARCHAR" />
+  </resultMap>  
+   <resultMap id="PersonResultMap" type="com.bky.model.QyPerson" >
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="psnId" property="psnId" jdbcType="VARCHAR" />
+    <result column="cpyId" property="cpyId" jdbcType="VARCHAR" />
+    <result column="psnName" property="psnName" jdbcType="VARCHAR" />
+    <result column="psnAge" property="psnAge" jdbcType="VARCHAR" />
+    <result column="psnSex" property="psnSex" jdbcType="VARCHAR" />
+    <result column="psnPhone" property="psnPhone" jdbcType="VARCHAR" />
+    <result column="hisInfo" property="hisInfo" jdbcType="VARCHAR" />
+    <result column="relaInfo" property="relaInfo" jdbcType="VARCHAR" />
+    <result column="famInfo" property="famInfo" jdbcType="VARCHAR" />
+    <result column="itsInfo" property="itsInfo" jdbcType="VARCHAR" />
+    <result column="itsInfo1" property="itsInfo1" jdbcType="VARCHAR" />
+    <result column="itsInfo2" property="itsInfo2" jdbcType="VARCHAR" />
+    <result column="itsInfo3" property="itsInfo3" jdbcType="VARCHAR" />
+    <result column="itsInfo4" property="itsInfo4" jdbcType="VARCHAR" />
+    <result column="itsInfo5" property="itsInfo5" jdbcType="VARCHAR" />
+    <result column="itsInfo6" property="itsInfo6" jdbcType="VARCHAR" />
+    <result column="itsInfo7" property="itsInfo7" jdbcType="VARCHAR" />
+    <result column="itsInfo8" property="itsInfo8" jdbcType="VARCHAR" />
+    <result column="itsInfo9" property="itsInfo9" jdbcType="VARCHAR" />
+    <result column="itsInfo10" property="itsInfo10" jdbcType="VARCHAR" />
+    <result column="createTime" property="createTime" jdbcType="VARCHAR" />
+    <result column="mdfTime" property="mdfTime" jdbcType="VARCHAR" />
+    <result column="othInfo" property="othInfo" jdbcType="VARCHAR" />
+    <result column="other1" property="other1" jdbcType="VARCHAR" />
+    <result column="other2" property="other2" jdbcType="VARCHAR" />
+    <result column="other3" property="other3" jdbcType="VARCHAR" />
+  </resultMap>
+  <!-- 
+  <sql id="Base_Column_List" >
+    id, tname, tpwd
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tadd
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+   -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tadd
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  
+   <delete id="deleteZp" parameterType="java.lang.String" >
+    delete from qy_job
+    where cpyId = #{cpyId,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insert" parameterType="com.bky.model.Add" >
+    insert into tadd (id, tname, tpwd
+      )
+    values (#{id,jdbcType=VARCHAR}, #{tname,jdbcType=VARCHAR}, #{tpwd,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertZp" parameterType="com.bky.model.QyJob" >
+    insert into qy_job (cpyId, jobYear, jobNum, gradNum, employNum
+      )
+    values (#{cpyId,jdbcType=VARCHAR}, #{jobYear,jdbcType=VARCHAR}, #{jobNum,jdbcType=VARCHAR}, #{gradNum,jdbcType=VARCHAR}, #{employNum,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  
+  <insert id="insertSelective" parameterType="com.bky.model.Add" >
+    insert into tadd
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="tname != null" >
+        tname,
+      </if>
+      <if test="tpwd != null" >
+        tpwd,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="tname != null" >
+        #{tname,jdbcType=VARCHAR},
+      </if>
+      <if test="tpwd != null" >
+        #{tpwd,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bky.model.Add" >
+    update tadd
+    <set >
+      <if test="tname != null" >
+        tname = #{tname,jdbcType=VARCHAR},
+      </if>
+      <if test="tpwd != null" >
+        tpwd = #{tpwd,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.bky.model.Add" >
+    update tadd
+    set tname = #{tname,jdbcType=VARCHAR},
+      tpwd = #{tpwd,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="passwdModify" parameterType="com.bky.model.UstEmp" >
+    update gty_emp
+    <set >
+      <if test="empPasswd != null" >
+        empPasswd = #{empPasswd,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where empNo = #{empNo,jdbcType=VARCHAR}
+  </update>
+
+   <update id="mdfQyDes" parameterType="com.bky.model.QyCompany" >
+    update qy_company
+    <set>
+      <if test="cpyName != null and cpyName != ''" >
+        cpyName = #{cpyName,jdbcType=VARCHAR},
+      </if>
+      <if test="cpyState != null and cpyState != ''" >
+        cpyState = #{cpyState,jdbcType=VARCHAR},
+      </if>
+      <if test="cpyDesc != null and cpyDesc != ''" >
+        cpyDesc = #{cpyDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="cpyDecn != null and cpyDecn != ''" >
+        cpyDecn = #{cpyDecn,jdbcType=VARCHAR},
+      </if>
+      <if test="ceoid  != null and ceoid  != ''" >
+        ceoid  = #{ceoid ,jdbcType=VARCHAR},
+      </if>
+      <if test="manager1 != null and manager1  != ''" >
+        manager1 = #{manager1,jdbcType=VARCHAR},
+      </if>
+      <if test="manager2 != null and manager1  != ''" >
+        manager2 = #{manager2,jdbcType=VARCHAR},
+      </if>
+      <if test="manager3 != null and manager1  != ''" >
+        manager3 = #{manager3,jdbcType=VARCHAR},
+      </if>
+      <if test="executor1 != null and executor1 != ''" >
+        executor1 = #{executor1,jdbcType=VARCHAR},
+      </if>
+      <if test="executor2 != null and executor2 != ''" >
+        executor2 = #{executor2,jdbcType=VARCHAR},
+      </if>
+      <if test="cpyNature != null and cpyNature != ''" >
+        cpyNature = #{cpyNature,jdbcType=VARCHAR},
+      </if>
+      <if test="schContact != null and schContact != ''" >
+        schContact = #{schContact,jdbcType=VARCHAR},
+      </if>
+      <if test="schPos != null and schPos != ''" >
+        schPos = #{schPos,jdbcType=VARCHAR},
+      </if>
+      <if test="cpyContact != null and cpyContact != ''" >
+        cpyContact = #{cpyContact,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null and subject != ''" >
+        subject = #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null and industry != ''" >
+        industry = #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null and address != ''" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="cooContent != null and cooContent != ''" >
+        cooContent = #{cooContent,jdbcType=VARCHAR},
+      </if>
+      <if test="closely != null and closely != ''" >
+        closely = #{closely,jdbcType=VARCHAR},
+      </if>
+      <if test="inTime != null and inTime != ''" >
+        inTime = #{inTime,jdbcType=VARCHAR},
+      </if>
+      <if test="cpyTele != null and cpyTele != ''" >
+        cpyTele = #{cpyTele,jdbcType=VARCHAR},
+      </if>
+      <if test="products != null and products != ''" >
+        products = #{products,jdbcType=VARCHAR},
+      </if>
+      <if test="organStru != null and organStru != ''" >
+        organStru = #{organStru,jdbcType=VARCHAR},
+      </if>
+      <if test="personnel != null and personnel != ''" >
+        personnel = #{personnel,jdbcType=VARCHAR},
+      </if>
+      <if test="manDepart != null and manDepart != ''" >
+        manDepart = #{manDepart,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cpyId = #{cpyId,jdbcType=VARCHAR}
+  </update>
+ 
+   <update id="mdfQyEmp" parameterType="com.bky.model.QyPerson" >
+    update qy_person
+    <set >
+      <if test="psnName != null" >
+        psnName = #{psnName,jdbcType=VARCHAR},
+      </if>
+      <if test="psnSex != null" >
+        psnSex = #{psnSex,jdbcType=VARCHAR},
+      </if>
+      <if test="psnAge != null" >
+        psnAge = #{psnAge,jdbcType=VARCHAR},
+      </if>
+      <if test="psnPhone != null" >
+        psnPhone = #{psnPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="hisInfo != null" >
+        hisInfo = #{hisInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="relaInfo != null" >
+        relaInfo = #{relaInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="famInfo != null" >
+        famInfo = #{famInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="itsInfo != null" >
+        itsInfo = #{itsInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="itsInfo1 != null" >
+        itsInfo1 = #{itsInfo1,jdbcType=VARCHAR},
+      </if>
+      <if test="itsInfo2 != null" >
+        itsInfo2 = #{itsInfo2,jdbcType=VARCHAR},
+      </if>
+      <if test="itsInfo3 != null" >
+        itsInfo3 = #{itsInfo3,jdbcType=VARCHAR},
+      </if>
+      <if test="itsInfo4 != null" >
+        itsInfo4 = #{itsInfo4,jdbcType=VARCHAR},
+      </if>
+      <if test="itsInfo5 != null" >
+        itsInfo5 = #{itsInfo5,jdbcType=VARCHAR},
+      </if>
+      <if test="itsInfo6 != null" >
+        itsInfo6 = #{itsInfo6,jdbcType=VARCHAR},
+      </if>
+      <if test="itsInfo7 != null" >
+        itsInfo7 = #{itsInfo7,jdbcType=VARCHAR},
+      </if>
+      <if test="itsInfo8 != null" >
+        itsInfo8 = #{itsInfo8,jdbcType=VARCHAR},
+      </if>
+      <if test="itsInfo9 != null" >
+        itsInfo9 = #{itsInfo9,jdbcType=VARCHAR},
+      </if>
+      <if test="itsInfo10 != null" >
+        itsInfo10 = #{itsInfo10,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where psnId = #{psnId,jdbcType=VARCHAR}
+  </update>
+  
+   <update id="mdfQyZp" parameterType="com.bky.model.QyJob" >
+    update qy_job
+    <set >
+      <if test="jobNum != null" >
+        jobNum = #{jobNum,jdbcType=VARCHAR},
+      </if>
+      <if test="gradNum != null" >
+        gradNum = #{gradNum,jdbcType=VARCHAR},
+      </if>
+      <if test="employNum != null" >
+        employNum = #{employNum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cpyId = #{cpyId,jdbcType=VARCHAR}
+      and jobYear = #{jobYear,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="getAll" resultMap="BaseResultMap">
+  	SELECT * FROM tadd
+  </select>
+   
+   <select id="getAllCompany" resultMap="CompanyResultMap">
+  	SELECT * FROM qy_company
+  </select>
+
+   <select id="getCompanySid" parameterType="com.bky.model.QyCompany" resultMap="CompanyResultMap">
+  	SELECT schoolId,count(*) other1 FROM qy_company 
+  	where 1=1 
+   			  <if test="schoolId != '' and schoolId != null" >
+  			  	and schoolId = #{schoolId,jdbcType=VARCHAR}
+  	  		  </if>	  
+  	GROUP BY schoolId
+  </select>
+
+
+  <select id="queryQy" parameterType="com.bky.model.QyCompany" resultMap="CompanyResultMap">
+  	SELECT * FROM qy_company
+  	where 1=1
+  	          <if test="cpyName != '' and cpyName != null" >
+  				     and cpyName like CONCAT('%','${cpyName}','%' )
+  			  </if>
+  			  <if test="cpyState != '' and cpyState != 6 and cpyState != null" >
+  			    	and cpyState = #{cpyState,jdbcType=VARCHAR}
+  			  </if>
+  			  <if test="cpyId != '' and cpyId != null" >
+  			  		and cpyId = #{cpyId,jdbcType=VARCHAR}
+  	  		  </if>
+   			  <if test="schoolId != '' and schoolId != null" >
+  			  		and schoolId = #{schoolId,jdbcType=VARCHAR}
+  	  		  </if>
+  	  		  		order by cpyId desc
+  	</select>
+  	
+  <select id="loginSys" parameterType="com.bky.model.UstEmp" resultMap="EmpResultMap">
+  	SELECT * FROM gty_emp
+  	where empNo = #{empNo,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getDetail" parameterType="java.lang.String" resultMap="CompanyResultMap">
+  	SELECT * FROM qy_company
+  	where cpyId = #{cpyId,jdbcType=VARCHAR}
+  </select>
+  
+   <select id="qryQyEmp" parameterType="java.lang.String" resultMap="PersonResultMap">
+  	SELECT * FROM qy_person
+  	where psnId = #{psnId,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="zpQy" parameterType="java.lang.String" resultMap="ZPResultMap">
+  	SELECT * FROM qy_job
+  	where cpyId = #{cpyId,jdbcType=VARCHAR} order by jobYear asc;
+  </select>  
+
+  <select id="getTotal" parameterType="com.bky.model.QyCompany" resultMap="CompanyResultMap1">
+  	select cpyState,count(*) other1 from qy_company group by cpyState
+  </select>
+  
+  <select id="getEmpQY" parameterType="com.bky.model.QyCompany" resultMap="CompanyResultMap">
+  	select * from qy_company
+  </select>
+  
+  <select id="getAllEmp" parameterType="com.bky.model.UstEmp" resultMap="EmpResultMap1">
+  	select * from gty_emp
+  </select>
+  
+  <insert id="addQyInfo" parameterType="com.bky.model.QyCompany" >
+    insert into qy_company
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cpyName != null" >
+        cpyName,
+      </if>
+      <if test="cpyState != null" >
+        cpyState,
+      </if>
+      <if test="schoolId != null" >
+        schoolId,
+      </if>
+      <if test="cpyDesc != null" >
+        cpyDesc,
+      </if>
+      <if test="ceoid != null" >
+        ceoid,
+      </if>
+      <if test="ceoImg != null" >
+        ceoImg,
+      </if>
+      <if test="manager1 != null" >
+        manager1,
+      </if>
+      <if test="managerImg1 != null" >
+        managerImg1,
+      </if>
+      <if test="manager2 != null" >
+        manager2,
+      </if>
+      <if test="managerImg2 != null" >
+        managerImg2,
+      </if>
+      <if test="manager3 != null" >
+        manager3,
+      </if>
+      <if test="managerImg3 != null" >
+        managerImg3,
+      </if>
+      <if test="executor1 != null" >
+        executor1,
+      </if>
+      <if test="executor1Img != null" >
+        executor1Img,
+      </if>
+      <if test="executor2 != null" >
+        executor2,
+      </if>
+      <if test="executor2Img != null" >
+        executor2Img,
+      </if>
+      <if test="cpyDecn != null" >
+        cpyDecn,
+      </if>
+      <if test="createTime != null" >
+        createTime,
+      </if>
+      <if test="mdfTime != null" >
+        mdfTime,
+      </if>
+      <if test="other1 != null" >
+        other1,
+      </if>
+      <if test="other2 != null" >
+        other2,
+      </if>
+      <if test="other3 != null" >
+        other3,
+      </if>
+      <if test="empNo != null" >
+        empNo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cpyName != null" >
+        #{cpyName,jdbcType=VARCHAR},
+      </if>
+ 			0,
+      <if test="schoolId != null" >
+        #{schoolId,jdbcType=VARCHAR},
+      </if>
+      <if test="cpyDesc != null" >
+        #{cpyDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="ceoid != null" >
+        #{ceoid,jdbcType=VARCHAR},
+      </if>
+      <if test="ceoImg != null" >
+        #{ceoImg,jdbcType=VARCHAR},
+      </if>
+      <if test="manager1 != null" >
+        #{manager1,jdbcType=VARCHAR},
+      </if>
+      <if test="managerImg1 != null" >
+        #{managerImg1,jdbcType=VARCHAR},
+      </if>
+      <if test="manager2 != null" >
+        #{manager2,jdbcType=VARCHAR},
+      </if>
+      <if test="managerImg2 != null" >
+        #{managerImg2,jdbcType=VARCHAR},
+      </if>
+      <if test="manager3 != null" >
+        #{manager3,jdbcType=VARCHAR},
+      </if>
+      <if test="managerImg3 != null" >
+        #{managerImg3,jdbcType=VARCHAR},
+      </if>
+      <if test="executor1 != null" >
+        #{executor1,jdbcType=VARCHAR},
+      </if>
+      <if test="executor1Img != null" >
+        #{executor1Img,jdbcType=VARCHAR},
+      </if>
+      <if test="executor2 != null" >
+        #{executor2,jdbcType=VARCHAR},
+      </if>
+      <if test="executor2Img != null" >
+        #{executor2Img,jdbcType=VARCHAR},
+      </if>
+      <if test="cpyDecn != null" >
+        #{cpyDecn,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+       <if test="mdfTime != null" >
+        #{mdfTime,jdbcType=VARCHAR},
+      </if>
+      <if test="other1 != null" >
+        #{other1,jdbcType=VARCHAR},
+      </if>
+      <if test="other2 != null" >
+        #{other2,jdbcType=VARCHAR},
+      </if>
+      <if test="other3 != null" >
+        #{other3,jdbcType=VARCHAR},
+      </if>     
+      <if test="empNo != null" >
+        #{empNo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <insert id="addQyEmp" parameterType="com.bky.model.QyPerson" useGeneratedKeys="true" keyProperty="id">
+    insert into qy_person
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cpyId != null" >
+        cpyId,
+      </if>
+      <if test="psnName != null" >
+        psnName,
+      </if>
+      <if test="psnSex != null" >
+        psnSex,
+      </if>
+      <if test="psnAge != null" >
+        psnAge,
+      </if>
+      <if test="psnPhone!= null" >
+        psnPhone,
+      </if>
+      <if test="hisInfo != null" >
+        hisInfo,
+      </if>
+      <if test="relaInfo != null" >
+        relaInfo,
+      </if>
+      <if test="famInfo != null" >
+        famInfo,
+      </if>
+      <if test="itsInfo != null" >
+        itsInfo,
+      </if>
+      <if test="itsInfo1 != null" >
+        itsInfo1,
+      </if>
+      <if test="itsInfo2 != null" >
+        itsInfo2,
+      </if>
+      <if test="itsInfo3 != null" >
+        itsInfo3,
+      </if>
+      <if test="itsInfo4 != null" >
+        itsInfo4,
+      </if>
+      <if test="itsInfo5 != null" >
+        itsInfo5,
+      </if>
+      <if test="itsInfo6 != null" >
+        itsInfo6,
+      </if>
+      <if test="itsInfo7 != null" >
+        itsInfo7,
+      </if>
+      <if test="itsInfo8 != null" >
+        itsInfo8,
+      </if>
+      <if test="itsInfo9 != null" >
+        itsInfo9,
+      </if>
+      <if test="itsInfo10 != null" >
+        itsInfo10,
+      </if>
+      <if test="createTime != null" >
+        createTime,
+      </if>
+      <if test="mdfTime != null" >
+        mdfTime,
+      </if>
+      <if test="othInfo != null" >
+        othInfo,
+      </if>    
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cpyId != null" >
+        #{cpyId,jdbcType=VARCHAR},
+      </if>
+      <if test="psnName != null" >
+        #{psnName,jdbcType=VARCHAR},
+      </if>
+      <if test="psnSex != null" >
+        #{psnSex,jdbcType=VARCHAR},
+      </if>
+      <if test="psnAge != null" >
+        #{psnAge,jdbcType=VARCHAR},
+      </if>
+      <if test="psnPhone != null" >
+        #{psnPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="hisInfo != null" >
+        #{hisInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="relaInfo != null" >
+        #{relaInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="famInfo != null" >
+        #{famInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="itsInfo != null" >
+        #{itsInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="itsInfo1 != null" >
+        #{itsInfo1,jdbcType=VARCHAR},
+      </if>
+      <if test="itsInfo2 != null" >
+        #{itsInfo2,jdbcType=VARCHAR},
+      </if>
+      <if test="itsInfo3 != null" >
+        #{itsInfo3,jdbcType=VARCHAR},
+      </if>
+      <if test="itsInfo4 != null" >
+        #{itsInfo4,jdbcType=VARCHAR},
+      </if>
+      <if test="itsInfo5 != null" >
+        #{itsInfo5,jdbcType=VARCHAR},
+      </if>
+      <if test="itsInfo6 != null" >
+        #{itsInfo6,jdbcType=VARCHAR},
+      </if>
+      <if test="itsInfo7 != null" >
+        #{itsInfo7,jdbcType=VARCHAR},
+      </if>
+      <if test="itsInfo8 != null" >
+        #{itsInfo8,jdbcType=VARCHAR},
+      </if>
+      <if test="itsInfo9 != null" >
+        #{itsInfo9,jdbcType=VARCHAR},
+      </if>
+      <if test="itsInfo10 != null" >
+        #{itsInfo10,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="mdfTime != null" >
+        #{mdfTime,jdbcType=VARCHAR},
+      </if>
+      <if test="othInfo != null" >
+        #{othInfo,jdbcType=VARCHAR},
+      </if>       
+    </trim>
+  </insert>
+ <insert id="addQyZp" parameterType="com.bky.model.QyJob" >
+    insert into qy_job
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cpyId  != null" >
+        cpyId,
+      </if>
+      <if test="jobYear  != null" >
+        jobYear,
+      </if>
+      <if test="jobNum != null" >
+        jobNum,
+      </if>
+      <if test="gradNum != null" >
+        gradNum,
+      </if>
+      <if test="employNum != null" >
+        employNum,
+      </if>
+      <if test="createTime != null" >
+        createTime,
+      </if>
+      <if test="mdfTime  != null" >
+        mdfTime,
+      </if>
+      <if test="other1 != null" >
+        other1,
+      </if>
+      <if test="other2 != null" >
+        other2,
+      </if>
+      <if test="other3 != null" >
+        other3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cpyId != null" >
+        #{cpyId,jdbcType=VARCHAR},
+      </if>
+      <if test="jobYear != null" >
+        #{jobYear,jdbcType=VARCHAR},
+      </if>
+      <if test="jobNum != null" >
+        #{jobNum,jdbcType=VARCHAR},
+      </if>
+      <if test="gradNum != null" >
+        #{gradNum,jdbcType=VARCHAR},
+      </if>
+      <if test="employNum != null" >
+        #{employNum,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="mdfTime != null" >
+        #{mdfTime,jdbcType=VARCHAR},
+      </if>
+      <if test="other1 != null" >
+        #{other1,jdbcType=VARCHAR},
+      </if>
+      <if test="other2 != null" >
+        #{other2,jdbcType=VARCHAR},
+      </if>
+      <if test="other3 != null" >
+        #{other3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

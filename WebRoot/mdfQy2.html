@@ -1,0 +1,473 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+request.setCharacterEncoding("UTF-8");//设置编码格式为中文
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="css/styles.css">
+		<title>校企合作智能管理平台-企业详情</title>
+	</head>
+
+<body class="bgc" onload="init()">
+
+    <!-- ECharts单文件引入 -->
+    <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+    <script type="text/javascript">
+        // 路径配置
+        require.config({
+            paths: {
+                echarts: 'http://echarts.baidu.com/build/dist'
+            }
+        });       
+        // 使用
+        require(
+            [
+                'echarts',
+                'echarts/chart/bar' // 使用柱状图就加载bar模块，按需加载
+            ],
+            function (ec) {
+                // 基于准备好的dom，初始化echarts图表
+                var myChart = ec.init(document.getElementById('main')); 
+                var zpYear = document.getElementById("zpYear").value.split(',');
+                //var zpYear2 = 2016;
+                var option = {
+                    tooltip: {
+                        show: true
+                    },
+                    legend: {
+                        data:['每年招聘情况趋势图']
+                    },
+                    xAxis : [
+                        {
+                            type : 'category',
+                            data : [
+                           		<c:forEach var="list"  items="${qjbList}">${list.jobYear},</c:forEach>
+                            ]
+                        }
+                    ],
+                    yAxis : [
+                        {	
+                            type : 'value'
+                        }
+                    ],
+                    series : [
+                        {
+                            "name":"历年招聘人数",
+                            "type":"bar",
+                            "data":[<c:forEach var="list"  items="${qjbList}">${list.jobNum},</c:forEach>]
+                        }
+                    ]
+                };
+        
+                // 为echarts对象加载数据 
+                myChart.setOption(option); 
+            }
+        );
+        
+        function init(){
+        	//alert(document.getElementById("zpYear").value.replace(/\'/g,'"'));
+        	//alert(document.getElementById("zpNum").value.replace(/\'/g,'"'));
+        	//alert($('zpNum'));
+ 		}
+ 		
+ 		function sigToDob(name){
+ 			return name.replace(/\'/g,'"');
+ 		}
+ 		
+    </script>
+	<!--头部-->
+	<input id='zpYear' name='zpYear' type='hidden' value="${zpYear}">
+	<input id='zpNum' name='zpNum' type='hidden' value="${zpNum}">
+<header class="header md">
+	<div class="user-info"><span class="log-out"><a href="<%=request.getContextPath() %>/loginout.do">退出</a></span><a href="mdfUserPass.jsp?empNo=${sessionScope.empNo}"><span class="user">${sessionScope.empNo}</span></a></div>
+</header>
+
+	<!--面包屑-->
+<div class="crumb md">
+<c:if test="${ustId eq '0001'}">
+<a href="<%=request.getContextPath() %>/getAllCompany.do" class="home">
+返回首页
+</a>
+</c:if>
+<c:if test="${ustId ne '0001'}">
+<a href="<%=request.getContextPath() %>/QyListQry.do?schoolId=${sessionScope.ustId}" class="home">
+返回首页
+</a>
+</c:if>
+<span class="s-1">企业详情</span>
+<span class="s-1">
+<c:if test="${ErrMessage!='' and ErrMessage!=null}">
+<div class="tip-1">${ErrMessage}</div>
+</c:if>
+<c:if test="${InfoMessage!=''and InfoMessage!=null}">
+<div class="tip-2">${InfoMessage}</div>
+</c:if>
+</span>
+</div>
+	<!--主体-->
+<div class="contentBox-2">
+  <h2 class="h2-1">
+	  <div class="detailInf-1">
+    		<c:if test="${qcy.cpyState==0}">
+    			<span><img src="img/tree-1.gif" alt=""></span>成长期
+    		</c:if>
+    		<c:if test="${qcy.cpyState==1}">
+    			<span><img src="img/tree-2.gif" alt=""></span>成熟期
+    		</c:if>    	
+    		<c:if test="${qcy.cpyState==2}">
+    			<span><img src="img/tree-3.gif" alt=""></span>结果期
+    		</c:if>
+    		<c:if test="${qcy.cpyState==3}">
+    			<span><img src="img/tree-4.gif" alt=""></span>创新期
+    		</c:if>    		
+    	</div>   	
+  	<span></span><br><b>${qcy.cpyName}</b>
+  	<a href="mdfQyDes.jsp?cpyId=${qcy.cpyId}&cpyName=${qcy.cpyName}&cpyDesc=${qcy.cpyDesc}&cpyDecn=${qcy.cpyDecn}"  class="btn-edit"></a>
+  </h2>
+	<div class="detailInf-2">${qcy.cpyDesc}</div>
+	<!--责任人列表-->
+	
+	<div class="detailInf-3 bTree-3">
+		<a href="mdfQyDes.jsp?cpyId=${qcy.cpyId}&cpyName=${qcy.cpyName}&cpyDesc=${qcy.cpyDesc}&cpyDecn=${qcy.cpyDecn}"  class="btn-3">主要决策过程
+			<div class="contentProcess">
+			    </b></b>
+     			   ${qcy.cpyDecn}
+    		</div>
+		</a>
+   	<!--左边-->
+		<div class="boxLeft">
+			<!--列表1-->
+			<div class="leaderItem">
+				<h3 class="h3-1">
+				<c:if test="${qcy.ceoid!='' and qcy.ceoid!= null}">
+					<a href="<%=request.getContextPath() %>/mdfQyEmpInit.do?cpyId=${qcy.cpyId}&type=1">
+						<span class="btn-edit">
+					</a>
+				</c:if>
+				<c:if test="${qcy.ceoid=='' or qcy.ceoid== null}">
+					<a href="<%=request.getContextPath() %>/mdfQyEmpInit.do?cpyId=${qcy.cpyId}&type=1">
+						<span class="btn-add">
+					</a>
+				</c:if>
+				</span><span class="s-1">CEO(主管领导)</span></h3>
+					<ul>
+					<li>
+						<c:if test="${ceo.psnSex eq null}"><img src="img/defaultUser.jpg" alt=""></c:if><c:if test="${ceo.psnSex eq 1}"><img src="img/default-1.jpg" alt=""></c:if><c:if test="${ceo.psnSex eq 2}"><img src="img/default-2.jpg" alt=""></c:if>
+					<span class="s-1">
+					<c:choose>
+						<c:when test="${qcy.ceoid=='' or qcy.ceoid== null}">
+							请添加
+						</c:when>
+						<c:otherwise>
+								${ceo.psnName}<c:if test="${ceo.psnSex eq 1}">【女】</c:if><c:if test="${ceo.psnSex eq 2}">【男】</c:if>
+									</span><br><span class="s-2">${ceo.psnPhone}</span><span class="s-3">查看画像</span>
+								<!--画像详情-->
+								<c:if test="${ceo.psnSex eq 1}">
+								<div class="figure">
+								</c:if>
+								<c:if test="${ceo.psnSex eq 2}">
+								<div class="figure2">
+								</c:if>
+									<b></b>
+									<div class="figureL">
+										<span>${ceo.itsInfo1}</span><span>${ceo.itsInfo2}</span><span>${ceo.itsInfo3}</span><span>${ceo.itsInfo4}</span><span>${ceo.itsInfo5}</span>
+									</div>
+									<div class="figureR">
+										<span>${ceo.itsInfo6}</span><span>${ceo.itsInfo7}</span><span>${ceo.itsInfo8}</span><span>${ceo.itsInfo9}</span><span>${ceo.itsInfo10}</span>
+										<span>${ceo.itsInfo}</span>
+									</div>
+		
+								</div>
+								<!--画像详情 end-->
+						</c:otherwise>
+					</c:choose>
+					</li>
+					
+				</ul>
+			</div>
+			<!--列表2-->
+			<div class="leaderItem">
+				<h3 class="h3-1">
+				<c:if test="${qcy.manager2!='' and qcy.manager2!= null}">
+					<a href="<%=request.getContextPath() %>/mdfQyEmpInit.do?cpyId=${qcy.cpyId}&type=3">
+						<span class="btn-edit">
+					</a>
+				</c:if>
+				<c:if test="${qcy.manager2=='' or qcy.manager2== null}">
+					<a href="<%=request.getContextPath() %>/mdfQyEmpInit.do?cpyId=${qcy.cpyId}&type=3">
+						<span class="btn-add">
+					</a>
+				</c:if>
+				
+				<span class="s-1">决策部门负责人</span></h3>
+				<ul>
+					<li>
+					<c:if test="${manager2.psnSex eq null}"><img src="img/defaultUser.jpg" alt=""></c:if><c:if test="${manager2.psnSex eq 1}"><img src="img/default-1.jpg" alt=""></c:if><c:if test="${manager2.psnSex eq 2}"><img src="img/default-2.jpg" alt=""></c:if>
+					<span class="s-1">
+					<c:choose>
+						<c:when test="${manager2.psnName=='' or manager2.psnName== null}">
+							请添加
+						</c:when>
+						<c:otherwise>
+						${manager2.psnName}<c:if test="${manager2.psnSex eq 1}">【女】</c:if><c:if test="${manager2.psnSex eq 2}">【男】</c:if>
+						</span><br><span class="s-2">${manager2.psnPhone}</span><span class="s-3">查看画像</span>
+							<!--画像详情-->
+								<c:if test="${manager2.psnSex eq 1}">
+								<div class="figure">
+								</c:if>
+								<c:if test="${manager2.psnSex eq 2}">
+								<div class="figure2">
+								</c:if>
+								<b></b>
+								<div class="figureL">
+									<span>${manager2.itsInfo1}</span><span>${manager2.itsInfo2}</span><span>${manager2.itsInfo3}</span><span>${manager2.itsInfo4}</span><span>${manager2.itsInfo5}</span>
+								</div>
+								<div class="figureR">
+									<span>${manager2.itsInfo6}</span><span>${manager2.itsInfo7}</span><span>${manager2.itsInfo8}</span><span>${manager2.itsInfo9}</span><span>${manager2.itsInfo10}</span>
+									<span>${manager2.itsInfo}</span>
+								</div>
+	
+							</div>
+						<!--画像详情 end-->
+						
+						</c:otherwise>
+					</c:choose>
+					</li>
+					
+				</ul>
+			</div>
+			<!--列表3-->
+			<div class="leaderItem">
+				<h3 class="h3-1">
+				<c:if test="${qcy.executor1!='' and qcy.executor1!= null}">
+					<a href="<%=request.getContextPath() %>/mdfQyEmpInit.do?cpyId=${qcy.cpyId}&type=5">
+						<span class="btn-edit">
+					</a>
+				</c:if>
+				<c:if test="${qcy.executor1=='' or qcy.executor1== null}">
+					<a href="<%=request.getContextPath() %>/mdfQyEmpInit.do?cpyId=${qcy.cpyId}&type=5">
+						<span class="btn-add">
+					</a>
+				</c:if>
+				<span class="s-1">主要执行人1</span></h3>
+				<ul>
+					<li>
+					<img src="img/defaultUser.jpg" alt="">
+					<c:if test="${executor1.psnSex eq null}"><img src="img/defaultUser.jpg" alt=""></c:if><c:if test="${executor1.psnSex eq 1}"><img src="img/default-1.jpg" alt=""></c:if><c:if test="${executor1.psnSex eq 2}"><img src="img/default-2.jpg" alt=""></c:if>
+					<span class="s-1">
+					<c:choose>
+						<c:when test="${executor1.psnName=='' or executor1.psnName== null}">
+							请添加
+						</c:when>
+						<c:otherwise>
+						${executor1.psnName}<c:if test="${executor1.psnSex eq 1}">【女】</c:if><c:if test="${executor1.psnSex eq 2}">【男】</c:if>
+						</span><br><span class="s-2">${executor1.psnPhone}</span><span class="s-3">查看画像</span>
+							<!--画像详情-->
+								<c:if test="${executor1.psnSex eq 1}">
+								<div class="figure">
+								</c:if>
+								<c:if test="${executor1.psnSex eq 2}">
+								<div class="figure2">
+								</c:if>
+								<b></b>
+								<div class="figureL">
+									<span>${executor1.itsInfo1}</span><span>${executor1.itsInfo2}</span><span>${executor1.itsInfo3}</span><span>${executor1.itsInfo4}</span><span>${executor1.itsInfo5}</span>
+								</div>
+								<div class="figureR">
+									<span>${executor1.itsInfo6}</span><span>${executor1.itsInfo7}</span><span>${executor1.itsInfo8}</span><span>${executor1.itsInfo9}</span><span>${executor1.itsInfo10}</span>
+									<span>${executor1.itsInfo}</span>
+								</div>
+	
+							</div>
+							<!--画像详情 end-->
+						
+						</c:otherwise>
+					</c:choose>
+					</li>
+					
+				</ul>
+			</div>
+		</div>
+
+		<!--右边-->
+		<div class="boxRight">
+			<!--列表1-->
+			<div class="leaderItem">
+				<h3 class="h3-1">
+				<c:if test="${qcy.manager1!='' and qcy.manager1!= null}">
+					<a href="<%=request.getContextPath() %>/mdfQyEmpInit.do?cpyId=${qcy.cpyId}&type=2">
+						<span class="btn-edit">
+					</a>
+				</c:if>
+				<c:if test="${qcy.manager1=='' or qcy.manager1== null}">
+					<a href="<%=request.getContextPath() %>/mdfQyEmpInit.do?cpyId=${qcy.cpyId}&type=2">
+						<span class="btn-add">
+					</a>
+				</c:if>
+				<span class="s-1">分管领导</span></h3>
+				<ul>
+					<li>
+					<c:if test="${manager1.psnSex eq null}"><img src="img/defaultUser.jpg" alt=""></c:if><c:if test="${manager1.psnSex eq 1}"><img src="img/default-1.jpg" alt=""></c:if><c:if test="${manager1.psnSex eq 2}"><img src="img/default-2.jpg" alt=""></c:if>
+					<span class="s-1">
+					<c:choose>
+						<c:when test="${manager1.psnName=='' or manager1.psnName== null}" >
+							请添加
+						</c:when>
+						<c:otherwise>
+						${manager1.psnName}<c:if test="${manager1.psnSex eq 1}">【女】</c:if><c:if test="${manager1.psnSex eq 2}">【男】</c:if>
+						</span><br><span class="s-2">${manager1.psnPhone}</span><span class="s-3">查看画像</span>
+							<!--画像详情-->
+								<c:if test="${manager1.psnSex eq 1}">
+								<div class="figure">
+								</c:if>
+								<c:if test="${manager1.psnSex eq 2}">
+								<div class="figure2">
+								</c:if>
+								<b></b>
+								<div class="figureL">
+									<span>${manager1.itsInfo1}</span><span>${manager1.itsInfo2}</span><span>${manager1.itsInfo3}</span><span>${manager1.itsInfo4}</span><span>${manager1.itsInfo5}</span>
+								</div>
+								<div class="figureR">
+									<span>${manager1.itsInfo6}</span><span>${manager1.itsInfo7}</span><span>${manager1.itsInfo8}</span><span>${manager1.itsInfo9}</span><span>${manager1.itsInfo10}</span>
+									<span>${manager1.itsInfo}</span>
+								</div>
+	
+							</div>
+							<!--画像详情 end-->
+						
+						</c:otherwise>
+					</c:choose>
+
+					</li>
+					
+				</ul>
+			</div>
+			<!--列表2-->
+			<div class="leaderItem">
+				<h3 class="h3-1">
+				<c:if test="${qcy.manager3!='' and qcy.manager3!= null}">
+					<a href="<%=request.getContextPath() %>/mdfQyEmpInit.do?cpyId=${qcy.cpyId}&type=4">
+						<span class="btn-edit">
+					</a>
+				</c:if>
+				<c:if test="${qcy.manager3=='' or qcy.manager3== null}">
+					<a href="<%=request.getContextPath() %>/mdfQyEmpInit.do?cpyId=${qcy.cpyId}&type=4">
+						<span class="btn-add">
+					</a>
+				</c:if>
+				<span class="s-1">执行部门负责人</span></h3>
+				<ul>
+					<li>
+					<img src="img/defaultUser.jpg" alt="">
+					<c:if test="${manager3.psnSex eq null}"><img src="img/defaultUser.jpg" alt=""></c:if><c:if test="${manager3.psnSex eq 1}"><img src="img/default-1.jpg" alt=""></c:if><c:if test="${manager3.psnSex eq 2}"><img src="img/default-2.jpg" alt=""></c:if>
+					<span class="s-1">
+					<c:choose>
+						<c:when test="${manager3.psnName=='' or manager3.psnName== null}" >
+							请添加
+						</c:when>
+						<c:otherwise>
+							${manager3.psnName}<c:if test="${manager3.psnSex eq 1}">【女】</c:if><c:if test="${manager3.psnSex eq 2}">【男】</c:if>
+						</span><br><span class="s-2">${manager3.psnPhone}</span><span class="s-3">查看画像</span>
+							<!--画像详情-->
+								<c:if test="${manager3.psnSex eq 1}">
+								<div class="figure">
+								</c:if>
+								<c:if test="${manager3.psnSex eq 2}">
+								<div class="figure2">
+								</c:if>
+								<b></b>
+								<div class="figureL">
+									<span>${manager3.itsInfo1}</span><span>${manager3.itsInfo2}</span><span>${manager3.itsInfo3}</span><span>${manager3.itsInfo4}</span><span>${manager3.itsInfo5}</span>
+								</div>
+								<div class="figureR">
+									<span>${manager3.itsInfo6}</span><span>${manager3.itsInfo7}</span><span>${manager3.itsInfo8}</span><span>${manager3.itsInfo9}</span><span>${manager3.itsInfo10}</span>
+									<span>${manager3.itsInfo}</span>
+								</div>
+	
+							</div>
+							<!--画像详情 end-->	
+						</c:otherwise>
+					</c:choose>	
+					</li>
+				
+				</ul>
+			</div>
+			<!--列表3-->
+			<div class="leaderItem">
+				<h3 class="h3-1">
+				<c:if test="${qcy.executor2!='' and qcy.executor2!= null}">
+					<a href="<%=request.getContextPath() %>/mdfQyEmpInit.do?cpyId=${qcy.cpyId}&type=6">
+						<span class="btn-edit">
+					</a>
+				</c:if>
+				<c:if test="${qcy.executor2=='' or qcy.executor2== null}">
+					<a href="<%=request.getContextPath() %>/mdfQyEmpInit.do?cpyId=${qcy.cpyId}&type=6">
+						<span class="btn-add">
+					</a>
+				</c:if>
+				</span><span class="s-1">主要执行人2</span></h3>
+				<ul>
+					<li>
+					<c:if test="${executor2.psnSex eq null}"><img src="img/defaultUser.jpg" alt=""></c:if><c:if test="${executor2.psnSex eq 1}"><img src="img/default-1.jpg" alt=""></c:if><c:if test="${executor2.psnSex eq 2}"><img src="img/default-2.jpg" alt=""></c:if>
+					<span class="s-1">
+					<c:choose>
+						<c:when test="${executor2.psnName=='' or executor2.psnName== null}">
+							请添加
+						</c:when>
+						<c:otherwise>
+							${executor2.psnName}<c:if test="${executor2.psnSex eq 1}">【女】</c:if><c:if test="${executor2.psnSex eq 2}">【男】</c:if>
+						</span><br><span class="s-2">${executor2.psnPhone}</span><span class="s-3">查看画像</span>
+							<!--画像详情-->
+								<c:if test="${executor2.psnSex eq 1}">
+								<div class="figure">
+								</c:if>
+								<c:if test="${executor2.psnSex eq 2}">
+								<div class="figure2">
+								</c:if>
+								<b></b>
+								<div class="figureL">
+									<span>${executor2.itsInfo1}</span><span>${executor2.itsInfo2}</span><span>${executor2.itsInfo3}</span><span>${executor2.itsInfo4}</span><span>${executor2.itsInfo5}</span>
+								</div>
+								<div class="figureR">
+									<span>${executor2.itsInfo6}</span><span>${executor2.itsInfo7}</span><span>${executor2.itsInfo8}</span><span>${executor2.itsInfo9}</span><span>${executor2.itsInfo10}</span>
+									<span>${executor2.itsInfo}</span>
+								</div>
+	
+							</div>
+							<!--画像详情 end-->
+						</c:otherwise>
+					</c:choose>
+					
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!--右边 end-->
+	<div class="detailInf-4">
+		<h2><!-- 每年招聘情况趋势图  --><a href="<%=request.getContextPath() %>/zpQy.do?cid=${qcy.cpyId}&cName=${qcy.cpyName}" class="btnAddCom">添加招聘信息</a></h2>
+		<!-- <div class="chart">
+		<img src="img/tem-1.jpg" alt="">
+		</div> -->
+		  <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+		
+    	<div class="chart" id="main" ></div>
+	</div>
+	</div>
+
+</div>
+
+<footer>
+	<div class="contact">电话：020-86020034 / Fax: 020-36004211 招生就业办公室电话:86020463 / 36004159<br>
+地址：广州市白云区石井街庆隆中路100号 邮政编码：510430<br>
+Copyright@ 广州铁路职业技术学院 粤ICP备07015423号 粤公网安备 44011102002593号
+</div>
+</footer>
+</body>
+</html>
