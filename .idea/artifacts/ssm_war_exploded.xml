@@ -1,0 +1,35 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="ssm:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/ssm_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="ssm" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="module" name="aopalliance-1.0.jar" module-name="ssm" />
+          <element id="library" level="module" name="aspectjweaver-1.7.1.jar" module-name="ssm" />
+          <element id="library" level="module" name="commons-fileupload-1.2.2.jar" module-name="ssm" />
+          <element id="library" level="module" name="commons-logging-1.1.1.jar" module-name="ssm" />
+          <element id="library" level="module" name="druid-0.2.9.jar" module-name="ssm" />
+          <element id="library" level="module" name="junit-4.11.jar" module-name="ssm" />
+          <element id="library" level="module" name="mybatis-3.1.1.jar" module-name="ssm" />
+          <element id="library" level="module" name="mybatis-spring-1.1.1.jar" module-name="ssm" />
+          <element id="library" level="module" name="mysql-connector-java-5.1.21.jar" module-name="ssm" />
+          <element id="library" level="module" name="spring-aop-3.2.0.RELEASE.jar" module-name="ssm" />
+          <element id="library" level="module" name="spring-beans-3.2.0.RELEASE.jar" module-name="ssm" />
+          <element id="library" level="module" name="spring-context-3.2.0.RELEASE.jar" module-name="ssm" />
+          <element id="library" level="module" name="spring-core-3.2.0.RELEASE.jar" module-name="ssm" />
+          <element id="library" level="module" name="spring-expression-3.2.0.RELEASE.jar" module-name="ssm" />
+          <element id="library" level="module" name="spring-jdbc-3.1.1.RELEASE.jar" module-name="ssm" />
+          <element id="library" level="module" name="spring-test-3.2.0.RELEASE.jar" module-name="ssm" />
+          <element id="library" level="module" name="spring-tx-3.1.1.RELEASE.jar" module-name="ssm" />
+          <element id="library" level="module" name="spring-web-3.2.0.RELEASE.jar" module-name="ssm" />
+          <element id="library" level="module" name="spring-webmvc-3.2.0.RELEASE.jar" module-name="ssm" />
+          <element id="library" level="module" name="jstl-1.2.jar" module-name="ssm" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="ssm/web/Web" />
+    </root>
+  </artifact>
+</component>

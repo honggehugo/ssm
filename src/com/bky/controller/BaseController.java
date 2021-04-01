@@ -377,7 +377,10 @@ public class BaseController {
 		QyCompany qyc = new QyCompany();
 		try {
 			String lpd = up.getEmpPasswd()==null?"":up.getEmpPasswd().toString().trim();//获取前端密码数据
+			long startTime1 = System.currentTimeMillis();    //获取开始时间
 			UstEmp utp = baseService.loginSys(up);//获取数据库数据
+			long endTime1 = System.currentTimeMillis();    //获取结束时间
+			System.out.println("获取数据库时间：" + (endTime1 - startTime1) + "ms");    //输出程序运行时间
 			if (utp != null){
 				String dpd = utp.getEmpPasswd()==null?"":utp.getEmpPasswd().toString().trim();//数据库密码数据
 				String dpid = utp.getDptNo()==null?"":utp.getDptNo().toString().trim();//数据库学院id
@@ -432,6 +435,7 @@ public class BaseController {
 				request.setAttribute("msgInfo", "工号未维护,请联系管理员！");
 				return "login";
 			}
+			//获取结束时间
 			//request.setAttribute("InfoMessage", str);
 		} catch (Exception e) {
 			e.printStackTrace();

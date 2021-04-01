@@ -31,6 +31,18 @@
       <src_folder value="file://$MODULE_DIR$/src" expected_position="0" />
     </src_description>
   </component>
+  <component name="FacetManager">
+    <facet type="web" name="Web">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/WebRoot/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/WebRoot" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+  </component>
   <component name="NewModuleRootManager">
     <output url="file://$MODULE_DIR$/WebRoot/WEB-INF/classes" />
     <exclude-output />
@@ -38,9 +50,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="melibrary.com.genuitec.eclipse.j2eedt.core.MYECLIPSE_JAVAEE_6_CONTAINER" level="application" />
-    <orderEntry type="library" name="org.eclipse.jst.j2ee.internal.web.container" level="application" />
-    <orderEntry type="library" name="org.eclipse.jst.j2ee.internal.module.container" level="application" />
     <orderEntry type="module-library">
       <library name="aopalliance-1.0.jar">
         <CLASSES>
@@ -230,8 +239,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="com.genuitec.runtime.library/com.genuitec.generic_6.0" level="application" />
-    <orderEntry type="library" name="com.genuitec.runtime.library/com.genuitec.jstl_1.2.1" level="application" />
     <orderEntry type="inheritedJdk" />
+    <orderEntry type="library" name="aopalliance-1.0" level="project" />
   </component>
 </module>
